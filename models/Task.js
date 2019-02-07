@@ -1,5 +1,6 @@
 const mongoose =require("mongoose");
 
+const Schema = mongoose.Schema;
 
 const TaskSchema = new mongoose.Schema({
     userId: {
@@ -9,7 +10,11 @@ const TaskSchema = new mongoose.Schema({
     },
     title: String,
     description: String,
-    status: String
+    status: {
+        type: String,
+        default: 'new',
+        enum: ['new','in_progress', 'complete']
+    }
 });
 
 const  Task = mongoose.model("Task", TaskSchema);
