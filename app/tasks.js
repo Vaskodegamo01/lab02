@@ -31,7 +31,7 @@ router.post("/:id", auth, upload.none(),(req, res) => {
         .catch((e)=>res.send(e).status(500))
 });
 
-router.delete('/:id', (req, res)=>{
+router.delete('/:id', auth, (req, res)=>{
     Task.deleteOne({_id: req.params.id})
         .then(result => res.send(result))
         .catch((e)=>res.send(e).status(500))
