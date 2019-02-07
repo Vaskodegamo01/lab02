@@ -26,13 +26,13 @@ router.post("/", auth, upload.none(), (req, res) => {
 });
 
 router.post("/:id", auth, upload.none(),(req, res) => {
-    Task.updateOne({_id:req.params.id}, req.body)
+    Task.updateOne({_id:req.params.id, userId: req.user._id}, req.body)
         .then(result => res.send(result))
         .catch((e)=>res.send(e).status(500))
 });
 
 router.delete('/:id', auth, (req, res)=>{
-    Task.deleteOne({_id: req.params.id})
+    Task.deleteOne({_id: req.params.id, userId: req.user._id})
         .then(result => res.send(result))
         .catch((e)=>res.send(e).status(500))
 });
